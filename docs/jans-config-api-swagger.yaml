@@ -2555,8 +2555,6 @@ components:
         defaultSubjectType:
           type: string
           description: Default Subject Type used for Dynamic Client Registration.
-          items:
-            type: string
           enum:
             - public
             - pairwise
@@ -2746,8 +2744,6 @@ components:
         serviceDocumentation:
           type: string
           description: URL of a page containing human-readable information that developers might want or need to know when using the OpenID Provider.
-          items:
-            type: string
           format: url
           example: 'http://gluu.org/docs'
         claimsLocalesSupported:
@@ -2837,8 +2833,6 @@ components:
         defaultSignatureAlgorithm:
           type: string
           description: The default signature algorithm to sign ID Tokens.
-          items:
-            type: string
           enum:
             - HS256
             - HS384
@@ -3021,8 +3015,6 @@ components:
         pairwiseIdType:
           type: string
           description: The pairwise ID type.
-          items:
-            type: string
         pairwiseCalculationKey:
           type: string
           description: Key to calculate algorithmic pairwise IDs.
@@ -3669,10 +3661,7 @@ components:
       type: object
       required:
         - applicationType
-        - clientName
-        - subjectType
         - logout
-        - frontChannelLogoutSessionRequired
         - includeClaimsInIdToken
       properties:
         dn:
@@ -3879,6 +3868,7 @@ components:
             - client_secret_post
             - client_secret_jwt
             - private_key_jwt
+            - tls_client_auth
             - none
         tokenEndpointAuthSigningAlg:
           description: JWS alg algorithm (JWA) that must be used for signing the JWT used to authenticate the Client at the Token Endpoint for the private_key_jwt and client_secret_jwt authentication methods.
