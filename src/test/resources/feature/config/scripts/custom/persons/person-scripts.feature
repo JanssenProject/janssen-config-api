@@ -1,4 +1,4 @@
-@ignore
+
 Feature: Person Custom Scripts
 
 Background:

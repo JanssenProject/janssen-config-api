@@ -1,4 +1,4 @@
-@ignore
+
 Feature: Verify Fido2 configuration endpoint
 
 	Background:

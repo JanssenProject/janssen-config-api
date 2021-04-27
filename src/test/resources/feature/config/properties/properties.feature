@@ -1,4 +1,4 @@
-@ignore
+
 Feature: Verify Auth configuration endpoint
 
   	Background:

@@ -1,4 +1,4 @@
-@ignore
+
 Feature: Configure SMTP server
 
 	Background:

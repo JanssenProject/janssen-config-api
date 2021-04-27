@@ -1435,45 +1435,6 @@ paths:
           $ref: '#/components/responses/InternalServerError'
       security:
         - jans-auth: [https://jans.io/oauth/config/jwks.write]
-    post:
-      tags:
-        - Configuration – JWK - JSON Web Key (JWK)
-      summary: Imports key to keystore and persists it in auth serves JSON Web Key Set (JWKS)
-      description: Imports JSON Web Keys (JWK) to keystore
-      operationId: post-config-key
-      requestBody:
-        required: true
-        content:
-          application/x-www-form-urlencoded:
-            schema:
-              type: object
-              required:
-                - format
-                - certificate
-              properties:
-                format:
-                  type: string
-                  description: Signing certificates format
-                  enum:
-                  - PEM
-                  - DER
-                certificate:
-                  type: string
-                  description: Public certificates in the prescribed format.
-			  
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/JsonWebKey' 
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '500':
-          $ref: '#/components/responses/InternalServerError'
-      security:
-        - jans-auth: [https://jans.io/oauth/config/jwks.write]
     patch:
       tags:
         - Configuration – JWK - JSON Web Key (JWK)
