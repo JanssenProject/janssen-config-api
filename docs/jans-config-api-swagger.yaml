@@ -1463,6 +1463,91 @@ paths:
           $ref: '#/components/responses/InternalServerError'
       security:
         - oauth2: [https://jans.io/oauth/config/jwks.write]
+  /jans-config-api/api/v1/config/jwks/key:
+    post:
+      tags:
+        - Configuration – JWK - JSON Web Key (JWK)
+      summary: Adds a new key to JSON Web Keys (JWKS)
+      description: Adds a new key to JSON Web Keys (JWKS).
+      operationId: post-config-jwks-key
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/JsonWebKey'  
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JsonWebKey'  
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+      security:
+        - oauth2: [https://jans.io/oauth/config/jwks.write]  
+  /jans-config-api/api/v1/config/jwks/{kid}:
+    parameters:
+      - schema:
+          type: string
+        name: kid
+        in: path
+        description: The unique identifier for the key.
+        required: true
+    get:
+      tags:
+        - Configuration – JWK - JSON Web Key (JWK)
+      summary: Puts/replaces JWKS
+      description: Puts/replaces individual JSON Web Key based on kid
+      operationId: put-config-jwk-kid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/JsonWebKey'  
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JsonWebKey'  
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+      security:
+        - oauth2: [https://jans.io/oauth/config/jwks.write]
+    patch:
+      tags:
+        - Configuration – JWK - JSON Web Key (JWK)
+      summary: Patch JWKS
+      description: Patch individual JSON Web Key based on kid
+      operationId: patch-config-jwk-kid
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              type: array
+              items: 
+                $ref: '#/components/schemas/PatchRequest'
+                description: String representing patch-document.
+              example: '[{"op": "add","path": "/keys/1", "value": { "kty": "RSA", "e": "AQAB","use": "sig","crv": "","kid": "dd570bfb-276a-44aa-a97d-667b57587108_sig_rs256","x5c": ["MIIDBDCC..."],"exp": 1599751946863,"alg": "RS256","n": "zj1NE.."}}]'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JsonWebKey'  
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+      security:
+        - oauth2: [https://jans.io/oauth/config/jwks.write]
   /jans-config-api/api/v1/openid/clients:
     get:
       tags:
