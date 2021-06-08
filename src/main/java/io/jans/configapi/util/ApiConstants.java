@@ -61,6 +61,7 @@ public class ApiConstants {
     public static final String TYPE_PATH = "/{type}";
     public static final String NAME_PARAM_PATH = "/{name}";
     public static final String KEY_PATH = "/key";
+    public static final String KID_PATH = "/{kid}";
 
     public static final String LIMIT = "limit";
     public static final String PATTERN = "pattern";

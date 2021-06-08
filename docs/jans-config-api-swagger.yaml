@@ -1476,8 +1476,8 @@ paths:
             schema:
               $ref: '#/components/schemas/JsonWebKey'  
       responses:
-        '200':
-          description: OK
+        '201':
+          description: Created
           content:
             application/json:
               schema:
@@ -1499,14 +1499,9 @@ paths:
     get:
       tags:
         - Configuration – JWK - JSON Web Key (JWK)
-      summary: Puts/replaces JWKS
-      description: Puts/replaces individual JSON Web Key based on kid
+      summary: Get a JSON Web Key based on kid
+      description: Get a JSON Web Key based on kid
       operationId: put-config-jwk-kid
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/JsonWebKey'  
       responses:
         '200':
           description: OK
@@ -1519,12 +1514,12 @@ paths:
         '500':
           $ref: '#/components/responses/InternalServerError'
       security:
-        - oauth2: [https://jans.io/oauth/config/jwks.write]
+        - oauth2: [https://jans.io/oauth/config/jwks.readonly]
     patch:
       tags:
         - Configuration – JWK - JSON Web Key (JWK)
-      summary: Patch JWKS
-      description: Patch individual JSON Web Key based on kid
+      summary: Patch a specific JSON Web Key based on kid
+      description: Patch a specific JSON Web Key based on kid
       operationId: patch-config-jwk-kid
       requestBody:
         content:
@@ -1534,7 +1529,7 @@ paths:
               items: 
                 $ref: '#/components/schemas/PatchRequest'
                 description: String representing patch-document.
-              example: '[{"op": "add","path": "/keys/1", "value": { "kty": "RSA", "e": "AQAB","use": "sig","crv": "","kid": "dd570bfb-276a-44aa-a97d-667b57587108_sig_rs256","x5c": ["MIIDBDCC..."],"exp": 1599751946863,"alg": "RS256","n": "zj1NE.."}}]'
+              example: '[{"op": "add","path": "/kty", "value": "RSA"}]'
       responses:
         '200':
           description: OK
@@ -1544,8 +1539,27 @@ paths:
                 $ref: '#/components/schemas/JsonWebKey'  
         '401':
           $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
         '500':
           $ref: '#/components/responses/InternalServerError'
+      security:
+        - oauth2: [https://jans.io/oauth/config/jwks.write]
+    delete:
+      tags:
+        - Configuration – JWK - JSON Web Key (JWK)
+      summary: Delete a JSON Web Key based on kid
+      description: Delete a JSON Web Key based on kid
+      operationId: delete-config-jwk-kid
+      responses:
+        '204':
+          description: No Content
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          description: Internal Server Error
       security:
         - oauth2: [https://jans.io/oauth/config/jwks.write]
   /jans-config-api/api/v1/openid/clients:
