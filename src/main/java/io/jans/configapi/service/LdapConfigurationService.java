@@ -73,9 +73,7 @@ public class LdapConfigurationService {
     public GluuLdapConfiguration findByName(String name) {
         List<GluuLdapConfiguration> ldapConfigurations = findLdapConfigurations();
         log.debug(" findByName name = name "+name+" ldapConfigurations = "+ldapConfigurations);
-        if(ldapConfigurations==null || ldapConfigurations.isEmpty()) {
-           throw new NoSuchElementException("ldapConfigurations is null");
-        }
+        
         Optional<GluuLdapConfiguration> matchingLdapConfiguration = ldapConfigurations.stream()
                 .filter(d -> d.getConfigId().equals(name)).findFirst();
         return matchingLdapConfiguration.get();

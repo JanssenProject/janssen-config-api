@@ -54,6 +54,10 @@ Feature: JWKS endpoint
     And assert response.length != null
     
   Scenario: POST, GET, PATCH and selete a Key
+    #Given url mainUrl + '/test12345-66f1-4b4a-92ec-d969522f4cbc_sig_rs256'
+    #And header Authorization = 'Bearer ' + accessToken
+    #When method DELETE
+    #Then status 204 
     Given url mainUrl + '/key'
     And header Authorization = 'Bearer ' + accessToken
     And request read('jwk_key.json')
